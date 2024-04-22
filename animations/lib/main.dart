@@ -30,7 +30,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text("Animations App"),
       ),
       body: const Center(
-        child: ContainerExample1(),
+        child: AnimatedOnAndOffSwitch(),
       ),
     );
   }
