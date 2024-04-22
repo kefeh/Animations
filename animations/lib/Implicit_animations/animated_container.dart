@@ -58,3 +58,58 @@ class AnimatedProgressIndicatorState extends State<AnimatedProgressIndicator> {
     );
   }
 }
+
+class AnimatedOnAndOffSwitch extends StatefulWidget {
+  const AnimatedOnAndOffSwitch({super.key});
+
+  @override
+  AnimatedOnAndOffSwitchState createState() => AnimatedOnAndOffSwitchState();
+}
+
+class AnimatedOnAndOffSwitchState extends State<AnimatedOnAndOffSwitch> {
+  bool on = false;
+
+  void _updateProgress() {
+    setState(() {
+      on = !on;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _updateProgress,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        width: 100, // Example scaling
+        height: 40.0,
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: on ? 60 : 0),
+        decoration: BoxDecoration(
+          color: on ? Colors.lightBlueAccent : Colors.grey,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          //Without the Row, the child container will takeup the whole width and height of the parent
+          mainAxisSize: MainAxisSize
+              .min, //Using min size to ensure that the row uses the minmum size possible, that should be thte size of its child in this case
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: on ? Colors.blue : Colors.black26,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                on ? "on" : "off",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
